@@ -1,6 +1,6 @@
 var padding = { top: 20, right: 40, bottom: 0, left: 0 },
-    w = 500 - padding.left - padding.right,
-    h = 500 - padding.top - padding.bottom,
+    w = 250 - padding.left - padding.right,
+    h = 250 - padding.top - padding.bottom,
     r = Math.min(w, h) / 2,
     rotation = 0,
     oldrotation = 0,
@@ -152,12 +152,12 @@ svg.append("g")
 container.append("circle")
     .attr("cx", 0)
     .attr("cy", 0)
-    .attr("r", 60)
+    .attr("r", 30)
     .style({ "fill": "white", "cursor": "pointer" });
 //spin text
 container.append("text")
     .attr("x", 0)
-    .attr("y", 15)
+    .attr("y", 7)
     .attr("text-anchor", "middle")
     .text("SPIN")
-    .style({ "font-weight": "bold", "font-size": "30px" });
+    .style({ "font-weight": "bold", "font-size": "15px" });
