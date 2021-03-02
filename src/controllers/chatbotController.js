@@ -3,6 +3,7 @@ require("dotenv").config()
 import request from "request"
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN
+const WEBVIEW_URL = process.env.WEBVIEW_URL
 let test = (req, res) => {
     return res.send("hello again")
 }
@@ -82,6 +83,28 @@ function handleMessage(sender_psid, received_message) {
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
         }
+
+        if (received_message.text === "webview") {
+            response = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": "Open the website",
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": WEBVIEW_URL,
+                                "title": "Show a website",
+                                "webview_height_ratio" : "full",
+                                "messenger_extension" : true
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+
     } else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
@@ -158,8 +181,14 @@ function callSendAPI(sender_psid, response) {
         }
     });
 }
+
+let getWebView = (req, res) => {
+    return res.render("webview.ejs")
+}
+
 module.exports = {
     test: test,
     getWebHook: getWebHook,
     postWebHook: postWebHook,
+    getWebView: getWebView,
 }
