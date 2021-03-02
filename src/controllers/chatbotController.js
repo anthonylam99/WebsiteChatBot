@@ -73,7 +73,7 @@ let postWebHook = (req, res) => {
 
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
+let handleMessage = (sender_psid, received_message) => {
     let response;
 
     // Checks if the message contains text
@@ -82,7 +82,7 @@ function handleMessage(sender_psid, received_message) {
         // will be added to the body of our request to the Send API
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-        }
+        };
 
         if (received_message.text.toLowerCase() === "webview") {
             response = {
@@ -90,19 +90,20 @@ function handleMessage(sender_psid, received_message) {
                     "type": "template",
                     "payload": {
                         "template_type": "button",
-                        "text": "Open the website",
+                        "text": "OK. Let's set your room preferences, so I won't" +
+                            "need to ask for them in the future?",
                         "buttons": [
                             {
                                 "type": "web_url",
                                 "url": WEBVIEW_URL,
-                                "title": "Show a website",
-                                "webview_height_ratio" : "full",
-                                "messenger_extension" : true
-                            }
+                                "title": "Set preferences",
+                                "webview_height_ratio": "tall", //display on mobile
+                                "messenger_extensions": true //false : open the webview in new tab
+                            },
                         ]
                     }
                 }
-            }
+            };
         }
 
     } else if (received_message.attachments) {
@@ -137,7 +138,8 @@ function handleMessage(sender_psid, received_message) {
 
     // Send the response message
     callSendAPI(sender_psid, response);
-}
+};
+
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
