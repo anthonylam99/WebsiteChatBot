@@ -22,7 +22,8 @@
         MessengerExtensions.getContext('3143520742541810',
             function success(thread_context) {
                 // success
-                document.getElementById("psid").value(thread_context.psid)
+                console.log(thread_context)
+                document.getElementById("psid").value = thread_context.psid;
             },
             function error(err) {
                 // error
