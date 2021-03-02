@@ -1,14 +1,26 @@
+body{
+  width: 100%;
+}
 text {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 11px;
   pointer-events: none;
 }
-#chart {
+/* #chart {
   position: absolute;
   width: 500px;
   height: 500px;
   top: 0;
   left: 0;
+} */
+div#chart {
+  width: 100%;
+  text-align: center;
+  margin: 0px auto;
+}
+.main {
+  width: 405px;
+  height: 604px;
 }
 #question {
   position: absolute;

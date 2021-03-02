@@ -123,12 +123,14 @@ function spin() {
             // d3.select(".slice:nth-child(" + (picked + 1) + ") path")
             //     .attr("fill", "#111");
             //populate question
-            d3.select("#question h1")
-                .text(data[picked].label);
+            // d3.select("#question h1")
+            //     .text(data[picked].label);
+            // alert(data[picked].label)
             oldrotation = rotation;
 
             /* Get the result value from object "data" */
             console.log(data[picked].value)
+            swal("Hello world!");
 
             /* Comment the below line for restrict spin to sngle time */
             container.on("click", spin);
