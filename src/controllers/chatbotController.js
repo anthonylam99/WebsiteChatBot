@@ -4,7 +4,6 @@ import request from "request"
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN
 const WEBVIEW_URL = process.env.WEBVIEW_URL
-const PsidSender = ""
 let test = (req, res) => {
     return res.send("hello again")
 }
@@ -52,7 +51,6 @@ let postWebHook = (req, res) => {
 
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
-            PsidSender = sender_psid
             console.log('Sender PSID: ' + sender_psid);
 
             // Check if the event is a message or postback and
@@ -192,10 +190,6 @@ let getWebView = (req, res) => {
 
 
 let postResult = (req, res) => {
-    // response = {
-    //     "text": req.body.message
-    // };
-    // callSendAPI(req.body.psid, response);
     res.send(req.body)
 }
 
