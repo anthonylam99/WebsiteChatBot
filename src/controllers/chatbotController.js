@@ -193,7 +193,7 @@ let getWebView = (req, res) => {
 let postResult = (req, res) => {
     let response;
     response = {
-        "text": req.body.message
+        "text": `You got ${req.body.message}`
     };
     callSendAPI(req.body.psid, response)
     res.send(response)
