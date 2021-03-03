@@ -138,7 +138,7 @@ function spin() {
                 showCloseButton: true,
                 html: `
                   <div>
-                    <button class="btn btn-primary" onclick="onBtnClicked('reply')">Reply</button>
+                    <button class="btn btn-primary" onclick="onBtnClicked('ok')">Reply</button>
                     <div>select an action</div>
                     <button class="btn btn-danger" onclick="onBtnClicked('delete')">Delete</button>
                   </div>`
