@@ -190,6 +190,7 @@ let getWebView = (req, res) => {
 
 
 let postResult = (req, res) => {
+    callSendAPI(sender_psid, req.body);
     res.send(req.body)
 }
 

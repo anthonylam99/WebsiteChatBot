@@ -182,7 +182,10 @@ var onBtnClicked = (btnId) => {
     Swal.close();
     var sender_psid = document.getElementById("psid").value
     if (btnId == "ok") {
-        var data = { message: price };
+        var data = {
+            psid : sender_psid, 
+            message: price 
+        };
 
         fetch('https://website-chat-bot.herokuapp.com/results', {
             method: 'POST',
