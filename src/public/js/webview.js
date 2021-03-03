@@ -182,30 +182,18 @@ var onBtnClicked = (btnId) => {
     Swal.close();
     var sender_psid = document.getElementById("psid").value
     if (btnId == "ok") {
-        response = {
-            "text": `You got ${price}`
-        };
-        callSendAPI(sender_psid, response)
+        var data = { message: price };
+
+        fetch('https://website-chat-bot.herokuapp.com/results', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .catch(error => console.error('Error:', error))
     }
 };
 
-function callSendAPI(sender_psid, response) {
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": response
-    }
-    console.log(request_body)
-    // Send the HTTP request to the Messenger Platform
-    fetch('https://graph.facebook.com/v7.0/me/messages?access_token=EAACQJyY5zXQBAJLeuDQ65gNT8kiVRfwSmrl0GWpoL8oOkDz7bFUMyU2ZAQbU0ZCJyOrZBZAGPjAQ6RLDWriLlcD0mGzLLLNwmDuUBbyPCbX9euRgfTYU1PEIxW0ZAA5TmDB7WmQeZBK74OZBH9LniNqQJFYB1iGLsaK8KPyB2M8SQZDZD', {
-        'method': "POST",
-        'headers': {
-            'Content-Type': 'application/json'
-        },
-        'body': request_body,
-    }).then(function (res) {
-        console.log(res)
-    })
-}
