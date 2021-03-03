@@ -1,3 +1,4 @@
+import request from "request"
 var padding = { top: 20, right: 40, bottom: 0, left: 0 },
     w = 250 - padding.left - padding.right,
     h = 250 - padding.top - padding.bottom,
