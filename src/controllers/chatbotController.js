@@ -188,13 +188,9 @@ let getWebView = (req, res) => {
     return res.render("webview.ejs")
 }
 
-let getResult = (req, res) => {
-    
-}
 
 let postResult = (req, res) => {
-    console.log(req)
-    console.log(res)
+    return "a"
 }
 
 
@@ -203,6 +199,5 @@ module.exports = {
     getWebHook: getWebHook,
     postWebHook: postWebHook,
     getWebView: getWebView,
-    getResult: getResult,
     postResult : postResult,
 }
