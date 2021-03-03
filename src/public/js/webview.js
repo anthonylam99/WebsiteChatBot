@@ -7,6 +7,7 @@ var padding = { top: 20, right: 40, bottom: 0, left: 0 },
     newRotation = 0,
     picked = 100000,
     oldpick = [],
+    price = "",
     color = d3.scale.category20();//category20c()
 //randomNumbers = getRandomNumbers();
 //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
@@ -130,7 +131,18 @@ function spin() {
 
             /* Get the result value from object "data" */
             console.log(data[picked].value)
-            swal("Hello world!");
+            price = winner.label
+            Swal.fire({
+                title: "What you want to do?",
+                showConfirmButton: false,
+                showCloseButton: true,
+                html: `
+                  <div>
+                    <button class="btn btn-primary" onclick="onBtnClicked('reply')">Reply</button>
+                    <div>select an action</div>
+                    <button class="btn btn-danger" onclick="onBtnClicked('delete')">Delete</button>
+                  </div>`
+            });
 
             /* Comment the below line for restrict spin to sngle time */
             container.on("click", spin);
@@ -163,3 +175,39 @@ container.append("text")
     .attr("text-anchor", "middle")
     .text("SPIN")
     .style({ "font-weight": "bold", "font-size": "15px" });
+
+
+var onBtnClicked = (btnId) => {
+    Swal.close();
+    var sender_psid = document.getElementById("psid").value
+    if (btnId == "ok") {
+        response = {
+            "text": `You got ${price}`
+        };
+        callSendAPI(sender_psid, response)
+    }
+};
+
+function callSendAPI(sender_psid, response) {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "message": response
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v7.0/me/messages",
+        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+}
