@@ -10,7 +10,10 @@ let initWebRoutes = (app) => {
     router.get('/demo-webview', chatbotController.getWebView)
     router.get('/results', chatbotController.getResult)
     router.post('/results', chatbotController.postResult)
+    router.post('/users/create', (req, res) => {
+        return req.body
+    })
     return app.use("/", router)
-}   
+}
 
 module.exports = initWebRoutes
