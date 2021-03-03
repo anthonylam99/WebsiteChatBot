@@ -191,8 +191,9 @@ var onBtnClicked = (btnId) => {
                 'Content-Type': 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(response => console.log('Success:', JSON.stringify(response)))
+            .then(function (data) {
+                console.log('Request succeeded with JSON response', data);
+            })
     }
 };
 
