@@ -189,8 +189,8 @@ let getWebView = (req, res) => {
 }
 
 let getResult = (req, res) => {
-    console.log(res)
-    return res.redirect("/")
+    console.log(req.body)
+    return req.body
 }
 
 
