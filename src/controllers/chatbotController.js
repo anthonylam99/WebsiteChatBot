@@ -194,7 +194,7 @@ let getWebView = (req, res) => {
 
 let postResult = (req, res) => {
     console.log(psid)
-    res.send(req.body)
+    res.send(psid)
 }
 
 
