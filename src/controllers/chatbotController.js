@@ -190,7 +190,7 @@ let getWebView = (req, res) => {
 
 
 let postResult = (req, res) => {
-    return "a"
+    res.send(req.body)
 }
 
 
