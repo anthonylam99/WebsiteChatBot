@@ -199,7 +199,7 @@ function callSendAPI(sender_psid, response) {
     }
 
     // Send the HTTP request to the Messenger Platform
-    fetch('https://graph.facebook.com/v7.0/me/messages??access_token='+process.env.PAGE_ACCESS_TOKEN, {
+    fetch('https://graph.facebook.com/v7.0/me/messages?access_token=EAACQJyY5zXQBAJLeuDQ65gNT8kiVRfwSmrl0GWpoL8oOkDz7bFUMyU2ZAQbU0ZCJyOrZBZAGPjAQ6RLDWriLlcD0mGzLLLNwmDuUBbyPCbX9euRgfTYU1PEIxW0ZAA5TmDB7WmQeZBK74OZBH9LniNqQJFYB1iGLsaK8KPyB2M8SQZDZD', {
         'method' : "POST",
         'body'   : request_body,
     }).then(function(res){
