@@ -9,6 +9,7 @@ let initWebRoutes = (app) => {
     router.post("/webhook", chatbotController.postWebHook)
     router.get('/demo-webview', chatbotController.getWebView)
     router.get('/results', chatbotController.getResult)
+    router.post('/results', chatbotController.postResult)
     return app.use("/", router)
 }   
 
