@@ -54,7 +54,9 @@
     };
 
     FB.getLoginStatus(function (response) {
-        console.log(response)
+        if (response.status === 'connected') {
+            console.log(response.authResponse.accessToken);
+        }
     });
 
 </script>
@@ -68,6 +70,9 @@
         </div> -->
 
     </div>
+
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
     <input type="hidden" name="psid" id="psid" value="">
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <!-- partial -->
