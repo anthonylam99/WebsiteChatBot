@@ -55,12 +55,6 @@
 
     };
 
-    FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            console.log(response.authResponse.accessToken);
-        }
-    });
-
     function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
         console.log('statusChangeCallback');
         console.log(response);                   // The current login status of the person.
@@ -87,15 +81,6 @@
         });
     }
 
-    Swal.fire({
-        showConfirmButton: false,
-        showCloseButton: true,
-        html: `
-            <div>
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                </fb:login-button>
-            </div>`
-    });
 
 </script>
 
@@ -111,7 +96,8 @@
     <div id="status">
     </div>
 
-
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
     <input type="hidden" name="psid" id="psid" value="">
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <!-- partial -->
