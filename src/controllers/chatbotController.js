@@ -98,7 +98,7 @@ let handleMessage = (sender_psid, received_message) => {
                                 "type": "web_url",
                                 "url": WEBVIEW_URL,
                                 "title": "Set preferences",
-                                "webview_height_ratio": "tall", //display on mobile
+                                "webview_height_ratio": "full", //display on mobile
                                 "messenger_extensions": true //false : open the webview in new tab
                             },
                         ]
