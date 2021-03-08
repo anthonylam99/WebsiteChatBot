@@ -183,8 +183,8 @@ var onBtnClicked = (btnId) => {
     var sender_psid = document.getElementById("psid").value
     if (btnId == "ok") {
         var data = {
-            psid : sender_psid, 
-            message: price 
+            psid: sender_psid,
+            message: price
         };
 
         fetch('https://website-chat-bot.herokuapp.com/results', {
@@ -197,10 +197,16 @@ var onBtnClicked = (btnId) => {
             .then(function (data) {
                 console.log('Request succeeded with JSON response', data);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 console.log(err)
             })
     }
-    window.close()
+    MessengerExtensions.requestCloseBrowser(function success() {
+        // webview closed
+        console.log("a")
+    }, function error(err) {
+        // an error occurred
+        console.log(err);
+    });
 };
 
