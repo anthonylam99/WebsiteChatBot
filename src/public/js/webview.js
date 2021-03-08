@@ -146,14 +146,13 @@ function spin() {
             console.log(data[picked].value)
             price = winner.label
             Swal.fire({
-                title: "What you want to do?",
+                title: "Bạn đã trúng",
                 showConfirmButton: false,
                 showCloseButton: true,
                 html: `
                   <div>
-                    <button class="btn btn-primary" onclick="onBtnClicked('ok')">Reply</button>
-                    <div>select an action</div>
-                    <button class="btn btn-danger" onclick="onBtnClicked('delete')">Delete</button>
+                    <div>${price}</div>
+                    <button class="btn btn-primary" onclick="onBtnClicked('ok')">Nhận quà</button>
                   </div>`
             });
 
