@@ -1,7 +1,15 @@
+var element = document.getElementById('hidden');
+var positionInfo = element.getBoundingClientRect();
+var height = positionInfo.height;
+var width = positionInfo.width;
+var el = document.getElementById('hidden');
+var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+var fontSize = parseFloat(style);
+
 
 var padding = { top: 20, right: 40, bottom: 0, left: 0 },
-    w = 250 - padding.left - padding.right,
-    h = 250 - padding.top - padding.bottom,
+    w = height - padding.left - padding.right,
+    h = width - padding.top - padding.bottom,
     r = Math.min(w, h) / 2,
     rotation = 0,
     oldrotation = 0,
@@ -20,7 +28,8 @@ var data = [
     { "label": "A3", "value": 2, "question": "What CSS property is used for changing the color of text?", "degree": 0, "percent": 1 },
     { "label": "A4", "value": 2, "question": "What CSS property is used for changing the color of text?", "degree": 0, "percent": 1 }, //color
 ];
-
+console.log(width)
+console.log(height)
 var ps = 360 / data.length
 var totalLength = data.length
 var index = 0
@@ -45,11 +54,14 @@ console.log(expanded)
 
 console.log(data)
 
+
 var svg = d3.select('#chart')
     .append("svg")
     .data([data])
     .attr("width", w + padding.left + padding.right)
-    .attr("height", h + padding.top + padding.bottom);
+    .attr("height", h + padding.top + padding.bottom)
+    .attr("id", "svg-chart");
+
 var container = svg.append("g")
     .attr("class", "chartholder")
     .attr("transform", "translate(" + (w / 2 + padding.left) + "," + (h / 2 + padding.top) + ")");
@@ -167,7 +179,7 @@ svg.append("g")
 container.append("circle")
     .attr("cx", 0)
     .attr("cy", 0)
-    .attr("r", 30)
+    .attr("r", r / 4)
     .style({ "fill": "white", "cursor": "pointer" });
 //spin text
 container.append("text")
@@ -175,7 +187,7 @@ container.append("text")
     .attr("y", 7)
     .attr("text-anchor", "middle")
     .text("SPIN")
-    .style({ "font-weight": "bold", "font-size": "15px" });
+    .style({ "font-weight": "bold", "font-size": fontSize });
 
 
 var onBtnClicked = (btnId) => {
@@ -203,10 +215,8 @@ var onBtnClicked = (btnId) => {
     }
     MessengerExtensions.requestCloseBrowser(function success() {
         // webview closed
-        console.log("a")
     }, function error(err) {
         // an error occurred
-        console.log(err);
     });
 };
 

@@ -51,6 +51,14 @@
             version: 'v10.0'
         });
 
+        FB.api("me/likes/SOME_ID", function (response) {
+            if (response.data.length === 1) { //there should only be a single value inside "data"
+                console.log('You like it');
+            } else {
+                console.log("You don't like it");
+            }
+        });
+
         FB.AppEvents.logPageView();
 
     };
@@ -91,7 +99,7 @@
         <!-- <div id="question">
             <h1></h1>
         </div> -->
-
+        <div id="hidden"></div>
     </div>
     <div id="status">
     </div>
