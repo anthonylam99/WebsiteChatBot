@@ -201,5 +201,6 @@ var onBtnClicked = (btnId) => {
                 console.log(err)
             })
     }
+    window.close()
 };
 
