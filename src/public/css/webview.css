@@ -57,8 +57,8 @@ div#chart {
 
 @media only screen and (max-width: 600px) {
   #hidden {
-    width: 500px;
-    height: 500px;
+    width: 350px;
+    height: 350px;
     font-size: 18px;
   }
 }
