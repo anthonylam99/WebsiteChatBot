@@ -92,15 +92,11 @@ function setupGetStartedButton(res){
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         form: messageData
-    },
-    function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            // Print out the response body
-            res.send(body);
-
-        } else { 
-            // TODO: Handle errors
-            res.send(body);
+    },(err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
         }
     });
 }  
