@@ -59,11 +59,6 @@ let postWebHook = (req, res) => {
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
-                if (webhook_event.postback.payload === USER_DEFINED_PAYLOAD) {
-                    let response;
-                    response = { "text": "Thanks!" }
-                    callSendAPI(sender_psid, response);
-                }
                 handlePostback(sender_psid, webhook_event.postback);
             }
         });
@@ -75,31 +70,6 @@ let postWebHook = (req, res) => {
         // Return a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
     }
-}
-
-let setupGetStartedButton = (res) => {
-    var messageData = {
-        "greeting": [
-            {
-                "locale": "default",
-                "text": "Hello {{user_first_name}}! Are you ready to see the cutests cats and dogs"
-            }
-        ]
-    };
-
-    // Start the request
-    request({
-        url: 'https://graph.facebook.com/v7.0/me/messenger_profile?access_token=' + process.env.PAGE_ACCESS_TOKEN,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        form: messageData
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!')
-        } else {
-            console.error("Unable to send message:" + err);
-        }
-    });
 }
 
 
@@ -184,6 +154,8 @@ function handlePostback(sender_psid, received_postback) {
         response = { "text": "Thanks!" }
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
+    }else if(payload == "GET_STARTED_PAYLOAD"){
+        response = { "text": "Hello there" }
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
@@ -235,6 +207,5 @@ module.exports = {
     getWebHook: getWebHook,
     postWebHook: postWebHook,
     getWebView: getWebView,
-    postResult: postResult,
-    setupGetStartedButton: setupGetStartedButton
+    postResult : postResult,
 }
