@@ -41,7 +41,6 @@ let postWebHook = (req, res) => {
 
     // Check the webhook event is from a Page subscription
     if (body.object === 'page') {
-        setupGetStartedButton(res)
 
         // Iterate over each entry - there may be multiple if batched
         body.entry.forEach(function (entry) {
@@ -60,7 +59,7 @@ let postWebHook = (req, res) => {
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
-                if(webhook_event.postback.payload === USER_DEFINED_PAYLOAD ){
+                if (webhook_event.postback.payload === USER_DEFINED_PAYLOAD) {
                     let response;
                     response = { "text": "Thanks!" }
                     callSendAPI(sender_psid, response);
@@ -78,29 +77,30 @@ let postWebHook = (req, res) => {
     }
 }
 
-function setupGetStartedButton(res){
+let setupGetStartedButton = (res) => {
     var messageData = {
-            "get_started":[
+        "greeting": [
             {
-                "payload":"USER_DEFINED_PAYLOAD"
-                }
-            ]
+                "locale": "default",
+                "text": "Hello {{user_first_name}}! Are you ready to see the cutests cats and dogs"
+            }
+        ]
     };
 
     // Start the request
     request({
-        url: 'https://graph.facebook.com/v7.0/me/messenger_profile?access_token='+ process.env.PAGE_ACCESS_TOKEN,
+        url: 'https://graph.facebook.com/v7.0/me/messenger_profile?access_token=' + process.env.PAGE_ACCESS_TOKEN,
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         form: messageData
-    },(err, res, body) => {
+    }, (err, res, body) => {
         if (!err) {
             console.log('message sent!')
         } else {
             console.error("Unable to send message:" + err);
         }
     });
-}  
+}
 
 
 // Handles messages events
@@ -235,6 +235,6 @@ module.exports = {
     getWebHook: getWebHook,
     postWebHook: postWebHook,
     getWebView: getWebView,
-    postResult : postResult,
+    postResult: postResult,
     setupGetStartedButton: setupGetStartedButton
 }
