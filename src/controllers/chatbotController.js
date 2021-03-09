@@ -41,6 +41,7 @@ let postWebHook = (req, res) => {
 
     // Check the webhook event is from a Page subscription
     if (body.object === 'page') {
+        setupGetStartedButton(res)
 
         // Iterate over each entry - there may be multiple if batched
         body.entry.forEach(function (entry) {
