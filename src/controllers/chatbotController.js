@@ -59,6 +59,11 @@ let postWebHook = (req, res) => {
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
+                if(webhook_event.postback.payload === USER_DEFINED_PAYLOAD ){
+                    let response;
+                    response = { "text": "Thanks!" }
+                    callSendAPI(sender_psid, response);
+                }
                 handlePostback(sender_psid, webhook_event.postback);
             }
         });
@@ -71,6 +76,34 @@ let postWebHook = (req, res) => {
         res.sendStatus(404);
     }
 }
+
+function setupGetStartedButton(res){
+    var messageData = {
+            "get_started":[
+            {
+                "payload":"USER_DEFINED_PAYLOAD"
+                }
+            ]
+    };
+
+    // Start the request
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token='+ PAGE_ACCESS_TOKEN,
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        form: messageData
+    },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // Print out the response body
+            res.send(body);
+
+        } else { 
+            // TODO: Handle errors
+            res.send(body);
+        }
+    });
+}  
 
 
 // Handles messages events
@@ -206,4 +239,5 @@ module.exports = {
     postWebHook: postWebHook,
     getWebView: getWebView,
     postResult : postResult,
+    setupGetStartedButton: setupGetStartedButton
 }
