@@ -156,7 +156,7 @@ function spin() {
                   <div>
                     <div>${price}</div>
                     <button class="btn btn-primary" onclick="onBtnClicked('ok')">Nhận quà</button>
-                    <div class="fb-share-button" data-href="https://m.me/106683361477771" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                    <div class="fb-share-button" data-href="https://m.me/106683361477771" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://m.me/106683361477771" class="fb-xfbml-parse-ignore">Share</a></div>
                   </div>`
             });
 
