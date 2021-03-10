@@ -154,8 +154,37 @@ function handlePostback(sender_psid, received_postback) {
         response = { "text": "Thanks!" }
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
-    }else if(payload == "GET_STARTED_PAYLOAD"){
-        response = { "text": "Hello there" }
+    } else if (payload == "GET_STARTED_PAYLOAD") {
+        response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": [
+                        {
+                            "title": "<TITLE_TEXT>",
+                            "image_url": "https://us.123rf.com/450wm/onyxprj/onyxprj1710/onyxprj171000022/87288142-spinning-wheel-with-prizes-game-roulette-vector-illustration-isolate.jpg?ver=6",
+                            "subtitle": "Hello",
+                            "default_action": {
+                                "type": "web_url",
+                                "url": WEBVIEW_URL,
+                                "messenger_extensions": true,
+                                "webview_height_ratio": "full"
+                            },
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "url": WEBVIEW_URL,
+                                    "title": "Set preferences",
+                                    "webview_height_ratio": "full", //display on mobile
+                                    "messenger_extensions": true //false : open the webview in new tab
+                                },
+                            ]
+                        }
+                    ]
+                }
+            }
+        };
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
@@ -207,5 +236,5 @@ module.exports = {
     getWebHook: getWebHook,
     postWebHook: postWebHook,
     getWebView: getWebView,
-    postResult : postResult,
+    postResult: postResult,
 }
