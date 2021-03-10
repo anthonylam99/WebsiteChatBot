@@ -95,6 +95,8 @@ arcs.append("text").attr("transform", function (d) {
 container.on("click", spin);
 
 function spin() {
+    var sound_hands = document.getElementById("play-sound-spin");
+    sound_hands.play()
     container.on("click", null);
     const winner = expanded[Math.floor(Math.random() * expanded.length)];
     console.log(winner.label)
@@ -145,6 +147,7 @@ function spin() {
             /* Get the result value from object "data" */
             console.log(data[picked].value)
             price = winner.label
+            sound_hands.pause();
             Swal.fire({
                 title: "Bạn đã trúng",
                 showConfirmButton: false,

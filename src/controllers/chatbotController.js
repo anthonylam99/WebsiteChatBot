@@ -162,9 +162,9 @@ function handlePostback(sender_psid, received_postback) {
                     "template_type": "generic",
                     "elements": [
                         {
-                            "title": "<TITLE_TEXT>",
+                            "title": "Vòng quay may mắn",
                             "image_url": "https://us.123rf.com/450wm/onyxprj/onyxprj1710/onyxprj171000022/87288142-spinning-wheel-with-prizes-game-roulette-vector-illustration-isolate.jpg?ver=6",
-                            "subtitle": "Hello",
+                            "subtitle": "Chương trình khuyến mãi",
                             "default_action": {
                                 "type": "web_url",
                                 "url": WEBVIEW_URL,
@@ -175,7 +175,7 @@ function handlePostback(sender_psid, received_postback) {
                                 {
                                     "type": "web_url",
                                     "url": WEBVIEW_URL,
-                                    "title": "Set preferences",
+                                    "title": "Chơi",
                                     "webview_height_ratio": "full", //display on mobile
                                     "messenger_extensions": true //false : open the webview in new tab
                                 },
