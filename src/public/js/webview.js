@@ -249,7 +249,11 @@ var onShareFb = () => {
             if (response && !response.error_message) {
                 turn += 1
             } else {
-                alert('Error while posting.');
+                Swal.fire({
+                    title: "Chia sẻ thất bại",
+                    showConfirmButton: false,
+                    showCloseButton: true
+                });
             }
         }
     );
