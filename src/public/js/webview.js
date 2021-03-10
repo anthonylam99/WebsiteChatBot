@@ -156,7 +156,7 @@ function spin() {
                   <div>
                     <div>${price}</div>
                     <button class="btn btn-primary" onclick="onBtnClicked('ok')">Nhận quà</button>
-                    <div class="fb-share-button" data-href="https://m.me/106683361477771" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://m.me/106683361477771" class="fb-xfbml-parse-ignore">Share</a></div>
+                    <button class="btn btn-success" onclick="onShareFb()">Share</button>
                   </div>`
             });
 
@@ -223,3 +223,12 @@ var onBtnClicked = (btnId) => {
     });
 };
 
+var onShareFb = () => {
+    FB.ui({
+        display: 'popup',
+        method: 'share',
+        href: 'https://developers.facebook.com/docs/',
+    }, function (response) { 
+        console.log(response)
+    });
+}
