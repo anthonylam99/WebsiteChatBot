@@ -23,7 +23,7 @@ var padding = { top: 20, right: 40, bottom: 0, left: 0 },
 var data = [
     { "label": "Dell LAPTOP", "value": 0, "question": "What CSS property is used for specifying the area between the content and its border?", "degree": 0, "percent": 1 }, // padding
     { "label": "IMAC PRO", "value": 1, "question": "What CSS property is used for changing the font?", "degree": 0, "percent": 1 }, //font-family
-    { "label": "A1", "value": 2, "question": "What CSS property is used for changing the color of text?", "degree": 0, "percent": 95 },
+    { "label": "Iphone 12", "value": 2, "question": "What CSS property is used for changing the color of text?", "degree": 0, "percent": 95 },
     { "label": "A2", "value": 2, "question": "What CSS property is used for changing the color of text?", "degree": 0, "percent": 1 },
     { "label": "A3", "value": 2, "question": "What CSS property is used for changing the color of text?", "degree": 0, "percent": 1 },
     { "label": "A4", "value": 2, "question": "What CSS property is used for changing the color of text?", "degree": 0, "percent": 1 }, //color
