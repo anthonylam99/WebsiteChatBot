@@ -156,6 +156,10 @@ function spin() {
                   <div>
                     <div>${price}</div>
                     <button class="btn btn-primary" onclick="onBtnClicked('ok')">Nhận quà</button>
+                    <div class="fb-share-button" 
+                    data-href="https://www.messenger.com/t/100005464752524" 
+                    data-layout="button_count">
+                    </div>
                   </div>`
             });
 
