@@ -5,7 +5,7 @@ var width = positionInfo.width;
 var el = document.getElementById('hidden');
 var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
 var fontSize = parseFloat(style);
-
+var turn = 1
 
 var padding = { top: 20, right: 40, bottom: 0, left: 0 },
     w = height - padding.left - padding.right,
@@ -95,74 +95,87 @@ arcs.append("text").attr("transform", function (d) {
 container.on("click", spin);
 
 function spin() {
-    var sound_hands = document.getElementById("play-sound-spin");
-    sound_hands.play()
-    container.on("click", null);
-    const winner = expanded[Math.floor(Math.random() * expanded.length)];
-    console.log(winner.label)
-
-    console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
-    if (oldpick.length == data.length) {
-        console.log("done");
+    if (turn >= 1) {
+        var sound_hands = document.getElementById("play-sound-spin");
+        sound_hands.play()
         container.on("click", null);
-        return;
-    }
+        const winner = expanded[Math.floor(Math.random() * expanded.length)];
+        console.log(winner.label)
 
-    // var ps = 360 / data.length,
-    //     pieslice = Math.round(1440 / data.length),
-    //     rng = Math.floor((Math.random() * 1440) + 360);
+        console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+        if (oldpick.length == data.length) {
+            console.log("done");
+            container.on("click", null);
+            return;
+        }
 
-
-
-    // console.log(rng)
-    // rotation = (Math.round(rng / ps) * ps);
-    rotation = winner.degree
-    console.log(rotation)
-    // rotation = winner.degree
-    // newRotation = winner.degree
-
-    if ((rotation % 360) === 0) {
-        picked = 0
-    } else {
-        picked = Math.round(data.length - (rotation % 360) / ps);
-    }
-    console.log(picked)
-
-    rotation += 90 - Math.round(ps / 2);
+        // var ps = 360 / data.length,
+        //     pieslice = Math.round(1440 / data.length),
+        //     rng = Math.floor((Math.random() * 1440) + 360);
 
 
-    vis.transition()
-        .duration(3000)
-        .attrTween("transform", rotTween)
-        .each("end", function () {
-            //mark question as seen
-            // d3.select(".slice:nth-child(" + (picked + 1) + ") path")
-            //     .attr("fill", "#111");
-            //populate question
-            // d3.select("#question h1")
-            //     .text(data[picked].label);
-            // alert(data[picked].label)
-            oldrotation = rotation;
 
-            /* Get the result value from object "data" */
-            console.log(data[picked].value)
-            price = winner.label
-            sound_hands.pause();
-            Swal.fire({
-                title: "Bạn đã trúng",
-                showConfirmButton: false,
-                showCloseButton: true,
-                html: `
+        // console.log(rng)
+        // rotation = (Math.round(rng / ps) * ps);
+        rotation = winner.degree
+        console.log(rotation)
+        // rotation = winner.degree
+        // newRotation = winner.degree
+
+        if ((rotation % 360) === 0) {
+            picked = 0
+        } else {
+            picked = Math.round(data.length - (rotation % 360) / ps);
+        }
+        console.log(picked)
+
+        rotation += 90 - Math.round(ps / 2);
+
+
+        vis.transition()
+            .duration(3000)
+            .attrTween("transform", rotTween)
+            .each("end", function () {
+                //mark question as seen
+                // d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                //     .attr("fill", "#111");
+                //populate question
+                // d3.select("#question h1")
+                //     .text(data[picked].label);
+                // alert(data[picked].label)
+                oldrotation = rotation;
+
+                /* Get the result value from object "data" */
+                console.log(data[picked].value)
+                price = winner.label
+                sound_hands.pause();
+                Swal.fire({
+                    title: "Bạn đã trúng",
+                    showConfirmButton: false,
+                    showCloseButton: true,
+                    html: `
                   <div>
                     <div>${price}</div>
                     <button class="btn btn-primary" onclick="onBtnClicked('ok')">Nhận quà</button>
                     <button class="btn btn-success" onclick="onShareFb()">Share</button>
                   </div>`
-            });
+                });
 
-            /* Comment the below line for restrict spin to sngle time */
-            container.on("click", spin);
+                /* Comment the below line for restrict spin to sngle time */
+                container.on("click", spin);
+            });
+    } else {
+        Swal.fire({
+            title: "Bạn đã hết lượt quay",
+            showConfirmButton: false,
+            showCloseButton: true,
+            html: `
+          <div>
+            <div>Chia sẻ để nhận thêm lượt quay</div>
+            <button class="btn btn-success" onclick="onShareFb()">Share</button>
+          </div>`
         });
+    }
 }
 
 function rotTween(to) {
@@ -232,7 +245,7 @@ var onShareFb = () => {
         // callback
         function (response) {
             if (response && !response.error_message) {
-                alert('Posting completed.');
+                turn += 1
             } else {
                 alert('Error while posting.');
             }
