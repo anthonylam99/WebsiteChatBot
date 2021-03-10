@@ -224,11 +224,18 @@ var onBtnClicked = (btnId) => {
 };
 
 var onShareFb = () => {
-    FB.ui({
-        display: 'popup',
-        method: 'share',
-        href: 'https://developers.facebook.com/docs/',
-    }, function (response) { 
-        console.log(response)
-    });
+    FB.ui(
+        {
+            method: 'share',
+            href: 'https://developers.facebook.com/docs/',
+        },
+        // callback
+        function (response) {
+            if (response && !response.error_message) {
+                alert('Posting completed.');
+            } else {
+                alert('Error while posting.');
+            }
+        }
+    );
 }
