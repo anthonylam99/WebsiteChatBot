@@ -38,10 +38,10 @@ var index = 0
 data.map(function (i) {
     index++
     if (index === totalLength) {
-        var degree = ((totalLength - index) * ps) + 360 * 4
+        var degree = ((totalLength - index) * ps) + 360 * 8
         data[0]['degree'] = degree
     } else {
-        var degree = ((totalLength - index) * ps) + 360 * 4
+        var degree = ((totalLength - index) * ps) + 360 * 8
         data[index]['degree'] = degree
     }
 })
