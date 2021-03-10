@@ -95,7 +95,9 @@ arcs.append("text").attr("transform", function (d) {
 container.on("click", spin);
 
 function spin() {
+    
     if (turn >= 1) {
+        turn -= 1
         var sound_hands = document.getElementById("play-sound-spin");
         sound_hands.play()
         container.on("click", null);
@@ -252,3 +254,4 @@ var onShareFb = () => {
         }
     );
 }
+console.log(turn)
